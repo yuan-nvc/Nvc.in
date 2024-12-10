@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/Nvc.in/', // Update this to match your GitHub repo name
+  base: '/nvc-web/',  // Updated to match repository name
   plugins: [react()],
   build: {
     minify: 'terser',

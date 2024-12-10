@@ -16,6 +16,11 @@ const OptimizedImage = ({ src, alt, className }) => {
     setBlurDataUrl(canvas.toDataURL());
   }, []);
 
+  // Ensure the src path is correct for GitHub Pages
+  const imagePath = src.startsWith('http') || src.startsWith('data:') 
+    ? src 
+    : import.meta.env.BASE_URL + src.replace(/^\//, '');
+
   return (
     <div className="relative">
       {/* Blur placeholder */}
@@ -31,7 +36,7 @@ const OptimizedImage = ({ src, alt, className }) => {
       />
       {/* Actual image */}
       <img
-        src={src}
+        src={imagePath}
         alt={alt}
         className={`transition-opacity duration-500 ${className} ${
           isLoaded ? 'opacity-100' : 'opacity-0'
@@ -47,6 +52,10 @@ OptimizedImage.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   className: PropTypes.string,
+};
+
+OptimizedImage.defaultProps = {
+  className: '',
 };
 
 export default OptimizedImage;
